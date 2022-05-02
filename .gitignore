@@ -1,0 +1,17 @@
+node_modules/
+contracts/.direnv
+contracts/build
+contracts/reports
+contracts/dist
+
+subgraph/generated
+*/**/.envrc
+__pycache__
+.history
+.hypothesis/
+reports/
+.pytest_cache
+.env
+nethereum-gen.settings
+.vscode
+secret
