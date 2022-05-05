@@ -15,3 +15,5 @@ reports/
 nethereum-gen.settings
 .vscode
 secret
+
+frontend/node_modules
