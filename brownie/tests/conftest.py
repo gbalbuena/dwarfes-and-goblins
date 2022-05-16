@@ -3,7 +3,7 @@ import os
 
 import json
 from brownie import (
-    NftGame,
+    DwarfsAndGoblinsToken,
     chain,
     network,
     config,
@@ -20,9 +20,8 @@ def opensea_proxy():
 
 @pytest.fixture
 def nft_game(dev_account, opensea_proxy):
-    nft = dev_account.deploy(NftGame, opensea_proxy, gas_price=chain.base_fee)
+    nft = dev_account.deploy(DwarfsAndGoblinsToken, opensea_proxy, gas_price=chain.base_fee)
     yield nft
-
 
 @pytest.fixture
 def dev_account():
