@@ -13,7 +13,6 @@ from scripts.helpful_scripts import (
     LOCAL_BLOCKCHAIN_ENVIRONMENTS
 )
 
-
 @pytest.fixture
 def opensea_proxy():
     yield config["networks"][network.show_active()]["openseaProxy"]
