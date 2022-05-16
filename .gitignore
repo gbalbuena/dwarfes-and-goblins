@@ -1,10 +1,10 @@
 .DS_Store
 
 node_modules/
-contracts/.direnv
-contracts/build
-contracts/reports
-contracts/dist
+brownie/.direnv
+brownie/build
+brownie/reports
+brownie/dist
 
 subgraph/generated
 */**/.envrc

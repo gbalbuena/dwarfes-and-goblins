@@ -10,9 +10,8 @@ from brownie import (
     accounts
 )
 from scripts.helpful_scripts import (
-    LOCAL_BLOCKCHAIN_ENVIRONMENTS,
+    LOCAL_BLOCKCHAIN_ENVIRONMENTS
 )
-
 
 @pytest.fixture
 def opensea_proxy():
