@@ -8,4 +8,4 @@ test:
 build:
 	brownie compile
 
-.PHONY: bc test compile
+.PHONY: bc test build
