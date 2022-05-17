@@ -11,9 +11,9 @@ import { IProxyRegistry } from './../external/opensea/IProxyRegistry.sol';
 
 import "./DwarfFactory.sol";
 
-contract DwarfsAndGoblinsToken is Ownable, ReentrancyGuard, ERC721Enumerable, DwarfFactory {
+contract DwarfToken is Ownable, ReentrancyGuard, ERC721Enumerable, DwarfFactory {
     IProxyRegistry public immutable proxyRegistry;
-    constructor(IProxyRegistry _openSeaProxyRegistryAddress) ERC721("Dwarfs and Goblins", "DNG") {
+    constructor(IProxyRegistry _openSeaProxyRegistryAddress) ERC721("Dwarfs", "DWA") {
         proxyRegistry = _openSeaProxyRegistryAddress;
     }
 

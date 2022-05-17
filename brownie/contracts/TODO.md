@@ -1,0 +1,1 @@
+[] extract factory and DRY implementation of name, dna
