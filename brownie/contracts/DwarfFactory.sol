@@ -6,7 +6,7 @@ pragma solidity 0.8.9;
 /// Factory and storage
 contract DwarfFactory {
     event NewDwarf(uint dwarfId, string name, uint dna);
-    
+
     uint dnaDigits = 8;
     uint dnaModulus = 10 ** dnaDigits;
     uint constant MAX_SUPPLY = 1000;
