@@ -21,6 +21,15 @@ brownie pm install OpenZeppelin/openzeppelin-contracts@4.5.0
 brownie test
 ```
 
+### ganache
+requires 7.0.4+
+
+```bash
+yarn global remove ganache-cli ganache-core
+yarn global add ganache@7.0.4
+```
+
+
 ### VScode Settings
 
 ```js
