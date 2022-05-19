@@ -9,11 +9,15 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import { IProxyRegistry } from './../external/opensea/IProxyRegistry.sol';
 
-contract NftGame is Ownable, ReentrancyGuard, ERC721Enumerable {
+import "./DwarfFactory.sol";
+
+contract DwarfToken is Ownable, ReentrancyGuard, ERC721Enumerable, DwarfFactory {
     IProxyRegistry public immutable proxyRegistry;
-    constructor(
-        IProxyRegistry _openSeaProxyRegistryAddress
-    ) ERC721("NftGame", "NFTGAME") {
+    constructor(IProxyRegistry _openSeaProxyRegistryAddress) ERC721("Dwarfs", "DWA") {
         proxyRegistry = _openSeaProxyRegistryAddress;
+    }
+
+    function publicMint(string memory _name) public {
+        createRandomDwarf(_name);
     }
 }

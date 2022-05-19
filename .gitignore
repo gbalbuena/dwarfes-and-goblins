@@ -19,3 +19,5 @@ nethereum-gen.settings
 secret
 
 frontend/node_modules
+
+private
