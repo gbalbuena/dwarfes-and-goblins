@@ -18,12 +18,12 @@ contract DwarfToken is Ownable, ReentrancyGuard, ERC721Enumerable, DwarfFactory 
     }
 
     function publicMint(string memory _name) public {
-        
-        uint randDna = _generateRandomDna(_name);
+
+        uint256 randDna = _generateRandomDna(_name);
         dwarfs.push(Dwarf(_name, randDna));
 
         uint256 id = dwarfs.length - 1;
-        _createDwarf(_name, randDna, id);
+        _createDwarf(_name, randDna);
 
         _safeMint(msg.sender, id);
     }

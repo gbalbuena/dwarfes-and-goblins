@@ -1,9 +1,8 @@
-from brownie import GoblinFactory, Contract, chain
-from brownie.network import priority_fee
+from brownie import chain
 
-def test_goblin_factory(dev_account):
-    priority_fee("2 gwei")
-    df = dev_account.deploy(GoblinFactory, gas_price=chain.base_fee)
-    df.createRandomGoblin('Duzz')
-    assert df.goblins(0) == ("Duzz", 45894985)
-    assert  df.goblinToOwner(0) == dev_account
+
+def test_createRandomGoblin(admin, goblin_factory):
+
+    goblin_factory.createRandomGoblin("Duzz")
+    assert goblin_factory.goblins(0) == ("Duzz", 45894985)
+    assert goblin_factory.goblinToOwner(0) == admin

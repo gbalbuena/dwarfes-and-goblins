@@ -8,7 +8,7 @@ contract Gold is ERC20, Ownable {
 
   // a mapping from an address to whether or not it can mint / burn
   mapping(address => bool) controllers;
-  
+
   constructor() ERC20("GOLD", "GOLD") { }
 
   /**
@@ -17,6 +17,7 @@ contract Gold is ERC20, Ownable {
    * @param amount the amount of $WOOL to mint
    */
   function mint(address to, uint256 amount) external {
+    //TODO fix this permission to the controller (Mine)
     // require(controllers[msg.sender], "Only controllers can mint");
     _mint(to, amount);
   }
