@@ -6,11 +6,11 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import {DwarfToken} from "./DwarfToken.sol";
-import {Gold} from "./Gold.sol";
+import { CreatureToken } from "./CreatureToken.sol";
+import { Gold } from "./Gold.sol";
 
 contract Mine is Ownable, ReentrancyGuard, IERC721Receiver {
-    DwarfToken dwarves;
+    CreatureToken creatures;
     Gold gold;
 
     uint256 public totalPlayerStaked = 0;
@@ -31,24 +31,24 @@ contract Mine is Ownable, ReentrancyGuard, IERC721Receiver {
         address owner;
     }
 
-    constructor(address _dwarves, address _gold) {
-        dwarves = DwarfToken(_dwarves);
+    constructor(address _creatures, address _gold) {
+        creatures = CreatureToken(_creatures);
         gold = Gold(_gold);
     }
 
     function sendToMine(address account, uint256 tokenId) external {
         require(account == msg.sender, "account passed in is not sender");
         require(
-            dwarves.ownerOf(tokenId) == msg.sender,
-            "message sender isn't owner of dwarf"
+            creatures.ownerOf(tokenId) == msg.sender,
+            "message sender isn't owner of creature"
         );
         // check approval
         require(
-            dwarves.getApproved(tokenId) == address(this),
+            creatures.getApproved(tokenId) == address(this),
             "staking contract not approved for token"
         );
         // transfer to token to mine contract
-        dwarves.transferFrom(msg.sender, address(this), tokenId);
+        creatures.transferFrom(msg.sender, address(this), tokenId);
 
         mine[tokenId] = Stake({
             owner: account,
@@ -80,7 +80,7 @@ contract Mine is Ownable, ReentrancyGuard, IERC721Receiver {
         gold.mint(_msgSender(), owed);
 
         if (unstake) {
-            dwarves.safeTransferFrom(address(this), msg.sender, tokenId);
+            creatures.safeTransferFrom(address(this), msg.sender, tokenId);
             delete mine[tokenId];
             totalPlayerStaked -= 1;
         } else {
@@ -111,7 +111,7 @@ contract Mine is Ownable, ReentrancyGuard, IERC721Receiver {
         uint256,
         bytes calldata
     ) external pure override returns (bytes4) {
-      require(from == address(0x0), "Cannot send tokens to Mine directly");
+      require(from == address(0x0), "Cannot send tokens to mine directly");
       return IERC721Receiver.onERC721Received.selector;
     }
 }

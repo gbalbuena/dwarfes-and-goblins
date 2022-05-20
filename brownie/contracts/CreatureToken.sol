@@ -9,22 +9,20 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import { IProxyRegistry } from './../external/opensea/IProxyRegistry.sol';
 
-import "./DwarfFactory.sol";
+import "./CreatureFactory.sol";
 
-contract DwarfToken is Ownable, ReentrancyGuard, ERC721Enumerable, DwarfFactory {
+contract CreatureToken is Ownable, ReentrancyGuard, ERC721Enumerable, CreatureFactory {
     IProxyRegistry public immutable proxyRegistry;
-    constructor(IProxyRegistry _openSeaProxyRegistryAddress) ERC721("Dwarfs", "DWA") {
+
+    constructor(IProxyRegistry _openSeaProxyRegistryAddress) ERC721("Creatures", "CREA") {
         proxyRegistry = _openSeaProxyRegistryAddress;
     }
 
     function publicMint(string memory _name) public {
-
         uint256 randDna = _generateRandomDna(_name);
-        dwarfs.push(Dwarf(_name, randDna));
-
-        uint256 id = dwarfs.length - 1;
-        _createDwarf(_name, randDna);
-
-        _safeMint(msg.sender, id);
+        creatures.push(Creature(_name, randDna));
+        uint256 creatureId = creatures.length - 1;
+        _createCreature(_name, randDna);
+        _safeMint(msg.sender, creatureId);
     }
 }

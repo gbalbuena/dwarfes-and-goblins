@@ -4,10 +4,8 @@ import os
 import json
 
 from brownie import (
-    DwarfFactory,
-    DwarfMetadata,
-    DwarfToken,
-    GoblinFactory,
+    CreatureFactory,
+    CreatureToken,
     Gold,
     Mine,
     chain,
@@ -28,35 +26,25 @@ def gold(admin):
     yield gold
 
 @pytest.fixture
-def gold_mine(admin, dwarfs, gold):
-    mine = admin.deploy(Mine, dwarfs, gold, gas_price=chain.base_fee)
+def mine(admin, creatures, gold):
+    mine = admin.deploy(Mine, creatures, gold, gas_price=chain.base_fee)
     yield mine
 
 @pytest.fixture
-def dwarf_factory(admin):
-    factory = admin.deploy(DwarfFactory, gas_price=chain.base_fee)
+def creature_factory(admin):
+    factory = admin.deploy(CreatureFactory, gas_price=chain.base_fee)
     yield factory
 
 @pytest.fixture
-def goblin_factory(admin):
-    factory = admin.deploy(GoblinFactory, gas_price=chain.base_fee)
-    yield factory
-
-@pytest.fixture
-def dwarfs(admin, opensea_proxy):
-    nft = admin.deploy(DwarfToken, opensea_proxy, gas_price=chain.base_fee)
+def creatures(admin, opensea_proxy):
+    nft = admin.deploy(CreatureToken, opensea_proxy, gas_price=chain.base_fee)
     yield nft
 
 @pytest.fixture
-def dwarfs_minted(dwarfs, user):
-    dwarfs.publicMint('Gabriele', {"from":user})
-    assert dwarfs.balanceOf(user) == 1
-    yield dwarfs
-
-@pytest.fixture
-def goblins(admin, opensea_proxy):
-    nft = admin.deploy(DwarfToken, opensea_proxy, gas_price=chain.base_fee)
-    yield nft
+def creatures_minted(creatures, user):
+    creatures.publicMint('Gabriele', {"from":user})
+    assert creatures.balanceOf(user) == 1
+    yield creatures
 
 @pytest.fixture
 def admin():
