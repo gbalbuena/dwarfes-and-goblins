@@ -6,5 +6,5 @@ def test_max_supply(admin, creature_factory):
 
 def test_create_random_creature(admin, creature_factory):
     creature_factory.createRandomCreature("Nabbi")
-    assert creature_factory.creatures(0) == ("Nabbi", 80053153)
+    assert creature_factory.creatures(0) == ("Nabbi", 0, 80053153)
     assert creature_factory.creaturesToOwner(0) == admin

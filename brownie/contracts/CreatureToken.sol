@@ -20,9 +20,11 @@ contract CreatureToken is Ownable, ReentrancyGuard, ERC721Enumerable, CreatureFa
 
     function publicMint(string memory _name) public {
         uint256 randDna = _generateRandomDna(_name);
-        creatures.push(Creature(_name, randDna));
+        Race race_ = Race.Dwarf;
+
+        creatures.push(Creature(_name, race_, randDna));
         uint256 creatureId = creatures.length - 1;
-        _createCreature(_name, randDna);
+        _createCreature(_name, race_, randDna);
         _safeMint(msg.sender, creatureId);
     }
 }
