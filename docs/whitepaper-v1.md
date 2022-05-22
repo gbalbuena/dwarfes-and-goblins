@@ -43,6 +43,14 @@ graph TD
     MINING --> MINE{still $GOLD}
     MINE --> |yes| REWARD
     REWARD --> |1/100 $GOLD| DWARF
+
+    MINE --> |no| WAR
+    WAR --> STILLWAR{still goblins alive}
+    STILLWAR -->|no| WINNER(Winner last standing)
+    STILLWAR -->|Yes| ATTACK
+    ATTACK --> GOBLIN
+    GOBLIN --> DWARF
+
 ```
 
 
