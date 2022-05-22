@@ -57,7 +57,6 @@ graph TD
 
 ```
 
-
 ## Total supply
 
 GEN0 Tokens: 10.000 for 0.0 ETH
@@ -118,9 +117,13 @@ Chance of spawn (on MINT): 1d3 = 1,2
 | Epic      | +5     | +8       | +8         |
 | Legendary | +8     | +13      | +13        |
 
-* Attack: DNA#ATTACK 1d12
-* Deffense: DNA#DEFENCE 1d12
-* Hit Points: DNA#HP 1D100
+* Attack: ATTACK 1d12
+* Deffense: DEFENCE 1d12
+* Hit Points: HP 1D100
+
+### Alternate mechanic for death
+Hit points total + Defense: reduce chance of DEATH per ATTACK
+Attack total: increase chance of DEATH per ATTACK
 
 
 ### Atributes
@@ -136,3 +139,9 @@ For simplicity only `name: string`, `Race: enum` and `dna: uint256` will be intr
 ## Limitations
 
 Given the intense use of randomness, and stacking unstacking mechanics this could be a technical impediment in high gas evm networks, we might need to fine tune the balance of the game as the supply and resources availables
+
+Testing:
+* Matematical model
+* Balance
+* Simulation
+* Chain link subscribe getRandomWork unit 
