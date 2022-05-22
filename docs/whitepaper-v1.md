@@ -26,10 +26,14 @@ Last standing reward: Wait for it
 * DWARF can be staked in the MINE to earn `$GOLD` for 100 blocks till they get tired and wait to come back UNSTAKE CLAIM
 * If a DWARF RETURNS (Unstack) from the MINE, the GOBLINS try to steal all of It's accumulated `$GOLD`
 
-### Final Battle
-
+### Ways of dying
 * If DWARF does not MINE (Unstack) for 1 MONTH (6154 * 30 blocks) I'll DIE of STARVATION
 * If GOBLIN does not STEAL (Unstack) for 3 MONTHS (6154 * 90 blocks) I'll DIE of PUNISHMENT (By the other GOBLINS)
+
+
+### Final Battle
+* You can ATTACK another creature of a different race, with a chance of KILL or substract HP (Still in discussion)
+
 
 ### End of game
 
@@ -69,6 +73,13 @@ Attack base: 4d6
 Defense base: 4d6
 Hit points base: 100 + 4d6
 
+Ordinary: 50/100
+Common: 21/100
+Rare: 13/100
+Very rare: 8/100
+Epic: 5/100
+Legendary: 3/100
+
 ### Dwarf
 
 Chance of spawn (on MINT): 1d3 = 3
@@ -81,7 +92,8 @@ Chance of spawn (on MINT): 1d3 = 3
 
 | Rarity    | Attack | Deffense | Hit Points | 
 |-----------|--------|----------|------------|
-| Common    | +3     | +5       | +1         |
+| Ordinary  | +2     | +3       | +1         |
+| Common    | +3     | +5       | +3         |
 | Rare      | +5     | +8       | +3         |
 | Very rare | +8     | +13      | +5         |
 | Epic      | +13    | +21      | +8         |
@@ -99,6 +111,7 @@ Chance of spawn (on MINT): 1d3 = 1,2
 
 | Rarity    | Attack | Deffense | Hit Points | 
 |-----------|--------|----------|------------|
+| Ordinary  | +1     | +1       | +1         |
 | Common    | +1     | +1       | +1         |
 | Rare      | +1     | +3       | +3         |
 | Very rare | +3     | +5       | +5         |
