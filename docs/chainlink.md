@@ -18,5 +18,4 @@ sequenceDiagram
 
 
 ## References
-* [Random Numbers: Using Chainlink VRF
-](https://docs.chain.link/docs/intermediates-tutorial/)
+* [Random Numbers: Using Chainlink VRF](https://docs.chain.link/docs/intermediates-tutorial/)

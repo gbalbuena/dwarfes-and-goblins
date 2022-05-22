@@ -11,22 +11,39 @@ Each group can attack each other once a creature has no more HP I'll DIE in a fi
 
 This history will be written and perpetuate on chain for ever.
 
-## Spawn
+GOBLINS are good to steal but not so good for war, in the other side DWARFS are war machines but while mining they have the limitations of their weight and slow speed so It's a disadvantage agains greedy GOBLINS
+
+Last standing reward: Wait for it
+
+## Mechanics
+
+### Spawn
+
 * There will only ever be 10,000 GEN0, minted for 0 ETH each (only gas), GEN1, GEN2, GEN3 will be only purchased via `$GOLD`.
 
-## Harvesting
+### Harvesting
+
 * DWARF can be staked in the MINE to earn `$GOLD` for 100 blocks till they get tired and wait to come back UNSTAKE CLAIM
 * If a DWARF RETURNS (Unstack) from the MINE, the GOBLINS try to steal all of It's accumulated `$GOLD`
 
-## Final Battle
+### Final Battle
+
 * If DWARF does not MINE (Unstack) for 1 MONTH (6154 * 30 blocks) I'll DIE of STARVATION
 * If GOBLIN does not STEAL (Unstack) for 3 MONTHS (6154 * 90 blocks) I'll DIE of PUNISHMENT (By the other GOBLINS)
 
-## End of game
+### End of game
 
 * Creatures can't ATTACK till 2/3 of the supply is reached
 * When MINE $GOLD supply is depleted, I'll crash forcing the cratures to only ATTACH each other
 * When a creature ATTACK another one will reduce his HP till KILL's it
+
+```mermaid
+graph TD
+    DWARF --> |stacking| MINING(Go mining)
+    MINING --> MINE{still $GOLD}
+    MINE --> |yes| REWARD
+    REWARD --> |1/100 $GOLD| DWARF
+```
 
 
 ## Total supply
@@ -35,7 +52,7 @@ GEN0 Tokens: 10.000 for 0.0 ETH
 GEN1 Tokens: 10.000 for 100 `$GOLD`
 GEN2 Tokens: 10.000 for 200 `$GOLD`
 GEN3 Tokens: 10.000 for 400 `$GOLD`
-`$GOLD`: 1.000.000
+`$GOLD` Total supply: 1.000.000
 
 
 ## Creatures, Races, Atributes and Rarity
@@ -94,3 +111,7 @@ For simplicity only `name: string`, `Race: enum` and `dna: uint256` will be intr
 | Name | String  | mint    |
 | Race | Enum    | 0, 1    |
 | DNA  | uint256 | uint256 |
+
+## Limitations
+
+Given the intense use of randomness, and stacking unstacking mechanics this could be a technical impediment in high gas evm networks, we might need to fine tune the balance of the game as the supply and resources availables
