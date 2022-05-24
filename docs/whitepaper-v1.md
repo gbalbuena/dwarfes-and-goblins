@@ -59,11 +59,20 @@ graph TD
 
 ## Total supply
 
+### NFT
+
 GEN0 Tokens: 10.000 for 0.0 ETH
 GEN1 Tokens: 10.000 for 100 `$GOLD`
 GEN2 Tokens: 10.000 for 200 `$GOLD`
 GEN3 Tokens: 10.000 for 400 `$GOLD`
-`$GOLD` Total supply: 1.000.000
+
+### Gold Tokens
+
+GEN1: `$GOLD`: 1.000.000
+GEN2: 2.000.000
+GEN3: 4.000.000
+
+
 
 
 ## Creatures, Races, Atributes and Rarity
