@@ -30,18 +30,20 @@ Last standing characters will be reward: Stay tuned
 
 * DWARF can be staked to a mine MINE to earn `$GOLD` for `43200 blocks` (~12 hr) till they get tired and wait return home (UNSTAKE CLAIM)
 
-Reward: `TOTAL_SUPPLY` /
+Reward: (`TOTAL_SUPPLY` - `SPEND`) / rand(1000,10000)
 
 ### Steal
 
 * GOBLIN can be staked to a mine STEAL some `$GOLD` for  `43200 blocks` (~12 hr) till they get tired and wait to return home (UNSTAKE CLAIM)
-
 
 Experimental:
 
 ```
 If a DWARF RETURNS (UNSTAKES) from the MINE, the GOBLINS have a change to steal some/all of It's accumulated `$GOLD`.
 ```
+### Hire new creatures
+
+* You spend `$GOLD` hiring extra GEN1,2,3 creatures, see [Total supply](#total-supply)
 
 ### Ways of dying
 
@@ -77,7 +79,7 @@ graph TD
     STILLWAR -->|Yes| ATTACK
     ATTACK --> GOBLIN
     GOBLIN --> REWARD
-
+    
     REWARD -->|$GOLD| DWARF
 
     DWARF --> |stacking| WAR(Go war)
