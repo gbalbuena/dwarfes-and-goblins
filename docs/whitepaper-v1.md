@@ -1,5 +1,7 @@
 # Dwarfs vs Goblins [draft v1.0.0]
 
+## Introduction
+
 On a remote metaverse, DWARFS mine $GOLD in a abandoned mines while GOBLINS are looking for opportunities to steal their precious rewards.
 Once a player depleted all resources from a mine they can used them to recruit more creatures (Dwarfs/Goblins) to strengthening there fraction.
 
@@ -18,23 +20,40 @@ Last standing characters will be reward: Stay tuned
 
 ### Spawn
 
-* There will only ever be 10,000 GEN0, minted for 0 ETH each (only gas), GEN1, GEN2, GEN3 will be only purchased via `$GOLD`.
+* There will only ever be 10,000 GEN0, minted for 0 ETH each (only gas), GEN1, GEN2, GEN3 will be only purchased via `$GOLD` obtained MINING or STEALING from MINES.
 
-### Harvesting
+### Hire new creatures
 
-* DWARF can be staked to a mine MINE to earn `$GOLD` for 100 blocks till they get tired and wait return home (UNSTAKE CLAIM)
-* If a DWARF RETURNS (UNSTAKES) from the MINE, the GOBLINS have a change to steal some/all of It's accumulated `$GOLD`.
+* You spend `$GOLD` hiring extra GEN1,2,3 creatures, see [Total supply](#total-supply)
+
+### Mine
+
+* DWARF can be staked to a mine MINE to earn `$GOLD` for `43200 blocks` (~12 hr) till they get tired and wait return home (UNSTAKE CLAIM)
+
+Reward: `TOTAL_SUPPLY` /
+
+### Steal
+
+* GOBLIN can be staked to a mine STEAL some `$GOLD` for  `43200 blocks` (~12 hr) till they get tired and wait to return home (UNSTAKE CLAIM)
+
+
+Experimental:
+
+```
+If a DWARF RETURNS (UNSTAKES) from the MINE, the GOBLINS have a change to steal some/all of It's accumulated `$GOLD`.
+```
 
 ### Ways of dying
 
 * If DWARF doesn't MINE but is stilled (STAKED) for 1 MONTH (6154 * 30 blocks). I'll DIE of STARVATION
 * If GOBLIN don't STEAL (UNSTAKE) for 3 MONTHS (6154 * 90 blocks) I'll DIE of PUNISHMENT (By the other GOBLINS)
 
+### Attack
 
 ### Final Battle
 * Everyone can ATTACK another creature of a opposite race, with a chance of KILL or subtract HP (Still in discussion)
 * collected resource may be used to recover HP
-
+* While attack you can take `$GOLD` drops from another player
 
 ### End of game mechanic's
 
@@ -42,30 +61,58 @@ Last standing characters will be reward: Stay tuned
 * When MINE $GOLD supply is depleted, I'll crash forcing the creatures to only ATTACH each other
 * When a creature ATTACK another one another they will reduce HP till KILL's it
 
+## Diagrams
+
+### Dwarf
+
 ```mermaid
 graph TD
     DWARF --> |stacking| MINING(Go mining)
     MINING --> MINE{still $GOLD}
     MINE --> |yes| REWARD
-    REWARD --> |1/100 $GOLD| DWARF
+    MINE --> |no| DWARF
 
-    MINE --> |no| WAR
     WAR --> STILLWAR{still goblins alive}
     STILLWAR -->|no| WINNER(Winner last standing)
     STILLWAR -->|Yes| ATTACK
     ATTACK --> GOBLIN
-    GOBLIN --> DWARF
+    GOBLIN --> REWARD
 
+    REWARD -->|$GOLD| DWARF
+
+    DWARF --> |stacking| WAR(Go war)
 ```
 
-## Total supply
+### Goblin
 
-### NFT
+```mermaid
+graph TD
+    GOBLIN --> |stacking| STEAL(Go steal)
+    STEAL --> MINE{still $GOLD}
+    MINE --> |yes| REWARD
+    MINE --> |no| GOBLIN
 
-GEN0 Tokens: 10.000 for 0.0 ETH
-GEN1 Tokens: 10.000 for 100 `$GOLD`
-GEN2 Tokens: 10.000 for 200 `$GOLD`
-GEN3 Tokens: 10.000 for 400 `$GOLD`
+    WAR --> STILLWAR{still dwarfs alive}
+    STILLWAR -->|no| WINNER(Winner last standing)
+    STILLWAR -->|Yes| ATTACK
+    ATTACK --> DWARF
+    DWARF --> REWARD
+
+    REWARD -->|$GOLD| GOBLIN
+
+    GOBLIN --> |stacking| WAR(Go war)
+```
+
+## Generations cost and total supply
+
+| Gen | Cost           | Total Supply  |     Subtotal  |
+|-----|----------------|---------------|---------------|
+| #0  |    0.0 `Ξ`     |   10.000      |               |
+| #1  | 10.000 `$GOLD` |   10.000      | 100.000.000   |
+| #2  | 20.000 `$GOLD` |   10.000      | 200.000.000   |
+| #3  | 30.000 `$GOLD` |   10.000      | 300.000.000   |
+| #4  | 50,000 `$GOLD` |   10.000      | 500.000.000   |
+|     |                |   50.000      | 1.100.000.000 |
 
 ### Gold Tokens
 
@@ -75,9 +122,58 @@ GEN3: 4.000.000
 
 ## Creatures, Races, Attributes and Rarity
 
+Attributes:
+
+```solidity
+struct Creature {
+    string name;
+    Race race;
+    uint256 dna;
+}
+```
+
+Races enum:
+```solidity
+enum Race {
+    Dwarf,
+    Goblin
+}
+```
+
+### DNA
+
+Dna is a uint256 value that stores all the traits and modifiers for a creature, given the descriptor will determine special ones, the first 8 will determine the rarity and main competitive caracteristics of the creature.
+
+AA: Attack
+BB: Defense
+CC: HIPOINTS
+DD: RARITY
+
+```mermaid
+sequenceDiagram
+    actor Wallet
+    Wallet ->>+ CreatureToken { ERC721 }: publicMint
+    
+    CreatureToken { ERC721 } ->>+ CreatureFactory: _generateRandomDna
+    Note right of CreatureToken: _generateRandomDna if no Chainlink
+
+    CreatureToken { ERC721 } ->>+ Chainlink VRF: transferAndCall
+    Chainlink VRF -->>+ CreatureToken { ERC721 }: tx successfully
+    CreatureToken { ERC721 } ->>+ Chainlink VRF: requestRandomWords
+    Chainlink VRF ->>+ CreatureToken { ERC721 }: fulfillRandomWords
+
+    CreatureToken { ERC721 } ->>+ CreatureFactory: _createCreature
+    CreatureToken { ERC721 } ->>+ ERC721: _safeMint
+    ERC721 ->>+ CreatureToken { ERC721 }: tx success
+```
+
+### Attributes
+
 Attack base: 4d6
 Defense base: 4d6
 Hit points base: 100 + 4d6
+
+### Rarity
 
 Ordinary: 50/100
 Common: 21/100
@@ -86,7 +182,9 @@ Very rare: 8/100
 Epic: 5/100
 Legendary: 3/100
 
-### Dwarf
+### Races
+
+#### Dwarf
 
 Chance of spawn (on MINT): 1d3 = 3
 
@@ -105,7 +203,7 @@ Chance of spawn (on MINT): 1d3 = 3
 | Epic      | +13    | +21      | +8         |
 | Legendary | +21    | +21      | +13        |
 
-### Goblin
+#### Goblin
 
 Chance of spawn (on MINT): 1d3 = 1,2
 
@@ -118,7 +216,7 @@ Chance of spawn (on MINT): 1d3 = 1,2
 | Rarity    | Attack | Defense | Hit Points | 
 |-----------|--------|----------|------------|
 | Ordinary  | +1     | +1       | +1         |
-| Common    | +1     | +1       | +1         |
+| Common    | +1     | +1       | +2         |
 | Rare      | +1     | +3       | +3         |
 | Very rare | +3     | +5       | +5         |
 | Epic      | +5     | +8       | +8         |
@@ -128,32 +226,34 @@ Chance of spawn (on MINT): 1d3 = 1,2
 * Defense: DEFENCE 1d12
 * Hit Points: HP 1D100
 
-### Alternate mechanic for death
+### Alternate mechanics for death
 Hit points total + Defense: reduce chance of DEATH per ATTACK
 Attack total: increase chance of DEATH per ATTACK
 
-
-### Attributes
-
-For simplicity only `name: string`, `Race: enum` and `dna: uint256` will be introduced.
-
-| Name | Type    | Source  |
-|------|---------|---------|
-| Name | String  | mint    |
-| Race | Enum    | 0, 1    |
-| DNA  | uint256 | uint256 |
-
 ## Limitations
 
-Given the intense use of randomness, during staking/unstaking mechanics randomness
-may be gamed from players. We envision a range of mechanisms which allow
-this process more efficient.
-On approach could be that users have to earn there place in the mine (which will in turn request randomness)
-We could use packing methods to get many random numbers from a single seed. [approach](https://ethereum.stackexchange.com/questions/112331/gas-efficient-way-to-generate-multiple-different-random-numbers?rq=1)
+Given the intense use of randomness, during staking/unstaking mechanics randomness may be gamed from players.
 
+We envision a range of mechanisms which allow this process more efficient.
+
+On approach could be that users have to earn there place in the mine (which will in turn request randomness)
+
+We could use packing methods to get many random numbers from a single seed. [approach](https://ethereum.stackexchange.com/questions/112331/gas-efficient-way-to-generate-multiple-different-random-numbers?rq=1)
 
 Testing:
 * Mathematical model
 * Balance
 * Simulation
 * Chain link subscribe getRandomWork unit 
+
+## Hypothesis
+
+Are games based on randomness possible to be fun and fair made in EVM blockchains?
+
+A real use case has to be deployed and tested as a real world example?
+
+This is valuable material to be used as design for a fair gameplay engine protocol?
+
+## Conclusion
+
+To be determined
