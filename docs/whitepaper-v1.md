@@ -1,19 +1,18 @@
 # Dwarfs vs Goblins [draft v1.0.0]
 
-On a remote metaverse, DWARFS mine $GOLD in a abandoned mines while GOBLINS look for oportunities to steal their precious rewards.
+On a remote metaverse, DWARFS mine $GOLD in a abandoned mines while GOBLINS are looking for opportunities to steal their precious rewards.
+Once a player depleted all resources from a mine they can used them to recruit more creatures (Dwarfs/Goblins) to strengthening there fraction.
 
-Once they depleted the resources and used them to hire more creatures on their side, the battle commence.
+Our Game is risk protocol for NFTs using pseudo randomness to steal or mine `$GOLD` resources.
+Those are then used re-enforce due recruitment of creatures and finally set the battle to the last standing (END OF GAME).
 
-Game is risk protocol for NFTs using pseudo randomness to steal or mine `$GOLD`
-use it to hire more creatures and finally set the battle to the last standing (END OF GAME)
+Each group can attack one another once a creature has no more HP I'll DIE in a final Battle where a last standing creature will live to be the last to tell the story.
 
-Each group can attack each other once a creature has no more HP I'll DIE in a final Battle where a last standing creature will live to be the last to tell the story.
-
-This history will be written and perpetuate on chain for ever.
+Victors history will be written and recorded as on-chain record. For everyone to see the and observe and review the battle.
 
 GOBLINS are good to steal but not so good for war, in the other side DWARFS are war machines but while mining they have the limitations of their weight and slow speed so It's a disadvantage agains greedy GOBLINS
 
-Last standing reward: Wait for it
+Last standing characters will be reward: Stay tuned
 
 ## Mechanics
 
@@ -23,23 +22,25 @@ Last standing reward: Wait for it
 
 ### Harvesting
 
-* DWARF can be staked in the MINE to earn `$GOLD` for 100 blocks till they get tired and wait to come back UNSTAKE CLAIM
-* If a DWARF RETURNS (Unstack) from the MINE, the GOBLINS try to steal all of It's accumulated `$GOLD`
+* DWARF can be staked to a mine MINE to earn `$GOLD` for 100 blocks till they get tired and wait return home (UNSTAKE CLAIM)
+* If a DWARF RETURNS (UNSTAKES) from the MINE, the GOBLINS have a change to steal some/all of It's accumulated `$GOLD`.
 
 ### Ways of dying
-* If DWARF does not MINE (Unstack) for 1 MONTH (6154 * 30 blocks) I'll DIE of STARVATION
-* If GOBLIN does not STEAL (Unstack) for 3 MONTHS (6154 * 90 blocks) I'll DIE of PUNISHMENT (By the other GOBLINS)
+
+* If DWARF doesn't MINE but is stilled (STAKED) for 1 MONTH (6154 * 30 blocks). I'll DIE of STARVATION
+* If GOBLIN don't STEAL (UNSTAKE) for 3 MONTHS (6154 * 90 blocks) I'll DIE of PUNISHMENT (By the other GOBLINS)
 
 
 ### Final Battle
-* You can ATTACK another creature of a different race, with a chance of KILL or substract HP (Still in discussion)
+* Everyone can ATTACK another creature of a opposite race, with a chance of KILL or subtract HP (Still in discussion)
+* collected resource may be used to recover HP
 
 
-### End of game
+### End of game mechanic's
 
 * Creatures can't ATTACK till 2/3 of the supply is reached
-* When MINE $GOLD supply is depleted, I'll crash forcing the cratures to only ATTACH each other
-* When a creature ATTACK another one will reduce his HP till KILL's it
+* When MINE $GOLD supply is depleted, I'll crash forcing the creatures to only ATTACH each other
+* When a creature ATTACK another one another they will reduce HP till KILL's it
 
 ```mermaid
 graph TD
@@ -72,10 +73,7 @@ GEN1: `$GOLD`: 1.000.000
 GEN2: 2.000.000
 GEN3: 4.000.000
 
-
-
-
-## Creatures, Races, Atributes and Rarity
+## Creatures, Races, Attributes and Rarity
 
 Attack base: 4d6
 Defense base: 4d6
@@ -93,12 +91,12 @@ Legendary: 3/100
 Chance of spawn (on MINT): 1d3 = 3
 
 * Attack: `Attack base` + `rarity modifier`
-* Deffense: `Defense base` + `rarity modifier`
+* Defense: `Defense base` + `rarity modifier`
 * Hit Points: `Hit points base`  + `rarity modifier`
 
 *Rarity modifier*:
 
-| Rarity    | Attack | Deffense | Hit Points | 
+| Rarity    | Attack | Defense | Hit Points | 
 |-----------|--------|----------|------------|
 | Ordinary  | +2     | +3       | +1         |
 | Common    | +3     | +5       | +3         |
@@ -112,12 +110,12 @@ Chance of spawn (on MINT): 1d3 = 3
 Chance of spawn (on MINT): 1d3 = 1,2
 
 * Attack: `Attack base` + `rarity modifier`
-* Deffense: `Defense base` + `rarity modifier`
+* Defense: `Defense base` + `rarity modifier`
 * Hit Points: `Hit points base`  + `rarity modifier`
 
 *Rarity modifier*:
 
-| Rarity    | Attack | Deffense | Hit Points | 
+| Rarity    | Attack | Defense | Hit Points | 
 |-----------|--------|----------|------------|
 | Ordinary  | +1     | +1       | +1         |
 | Common    | +1     | +1       | +1         |
@@ -127,7 +125,7 @@ Chance of spawn (on MINT): 1d3 = 1,2
 | Legendary | +8     | +13      | +13        |
 
 * Attack: ATTACK 1d12
-* Deffense: DEFENCE 1d12
+* Defense: DEFENCE 1d12
 * Hit Points: HP 1D100
 
 ### Alternate mechanic for death
@@ -135,7 +133,7 @@ Hit points total + Defense: reduce chance of DEATH per ATTACK
 Attack total: increase chance of DEATH per ATTACK
 
 
-### Atributes
+### Attributes
 
 For simplicity only `name: string`, `Race: enum` and `dna: uint256` will be introduced.
 
@@ -147,10 +145,15 @@ For simplicity only `name: string`, `Race: enum` and `dna: uint256` will be intr
 
 ## Limitations
 
-Given the intense use of randomness, and stacking unstacking mechanics this could be a technical impediment in high gas evm networks, we might need to fine tune the balance of the game as the supply and resources availables
+Given the intense use of randomness, during staking/unstaking mechanics randomness
+may be gamed from players. We envision a range of mechanisms which allow
+this process more efficient.
+On approach could be that users have to earn there place in the mine (which will in turn request randomness)
+We could use packing methods to get many random numbers from a single seed. [approach](https://ethereum.stackexchange.com/questions/112331/gas-efficient-way-to-generate-multiple-different-random-numbers?rq=1)
+
 
 Testing:
-* Matematical model
+* Mathematical model
 * Balance
 * Simulation
 * Chain link subscribe getRandomWork unit 
