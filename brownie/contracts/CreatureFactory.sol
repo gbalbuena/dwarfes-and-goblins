@@ -32,7 +32,7 @@ contract CreatureFactory {
     }
 
     function _generateRandomDna(string memory _str) internal view returns (uint256) {
-        uint256 rand = uint256(keccak256(abi.encodePacked(block.timestamp,block.difficulty, msg.sender)));
+        uint256 rand = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender, _str)));
         return rand % dna_modulus;
     }
 
