@@ -26,14 +26,13 @@ contract CreatureFactory {
     mapping (uint256 => address) public creaturesToOwner;
     mapping (address => uint256) ownerCreaturesCount;
 
-    function createRandomCreature(string memory _name) public {
-        uint256 random_dna = _generateRandomDna(_name);
+    function createRandomCreature(string memory _name, uint256 seed) public {
+        uint256 random_dna = _generateRandomDna(seed);
         _createCreature(_name, Race.Dwarf, random_dna);
     }
 
-    function _generateRandomDna(string memory _str) internal view returns (uint256) {
-        uint256 rand = uint256(keccak256(abi.encodePacked(block.timestamp,block.difficulty, msg.sender)));
-        return rand % dna_modulus;
+    function _generateRandomDna(uint256 seed) internal view returns (uint256) {
+        return seed % dna_modulus;
     }
 
     function _createCreature(string memory name_, Race race_, uint256 dna_) internal {

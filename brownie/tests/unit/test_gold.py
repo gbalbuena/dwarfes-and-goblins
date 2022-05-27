@@ -1,5 +1,5 @@
 import pytest
-from brownie import chain, Wei
+from brownie import Wei
 
 
 def test_mint(gold, admin, user):

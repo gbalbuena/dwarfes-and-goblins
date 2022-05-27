@@ -1,9 +1,34 @@
 import pytest
-from brownie import CreatureFactory, CreatureToken, Gold, Mine, chain, Wei
+from brownie import CreatureFactory, CreatureToken, Gold, Mine, chain, config, network, Wei, ZERO_ADDRESS
 
+from scripts.helpful_scripts import (
+    get_account,
+    get_contract,
+    LOCAL_BLOCKCHAIN_ENVIRONMENTS,
+    listen_for_event,
+)
 
-def test_creature_token_deployment(admin, opensea_proxy):
-    game = admin.deploy(CreatureToken, opensea_proxy, gas_price=chain.base_fee)
+from scripts.vrf_scripts.create_subscription import (
+    create_subscription,
+    fund_subscription,
+)
+
+def test_creature_token_deployment(admin, opensea_proxy, subscriptionId):
+    if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+            pytest.skip("Only for local testing")
+    # Arrange
+    subscription_id = create_subscription()
+    fund_subscription(subscription_id=subscription_id)
+    gas_lane = config["networks"][network.show_active()][
+        "gas_lane"
+    ]  # Also known as keyhash
+    vrf_coordinator = get_contract("vrf_coordinator")
+    link_token = get_contract("link_token")
+    game = admin.deploy(CreatureToken, opensea_proxy, subscription_id,
+        vrf_coordinator,
+        link_token,
+        gas_lane,  # Also known as keyhash
+        gas_price=chain.base_fee)
     assert game.name() == "Creatures"
 
 

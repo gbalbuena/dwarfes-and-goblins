@@ -1,4 +1,3 @@
-import pytest
 from brownie import chain, Wei
 
 
@@ -22,7 +21,7 @@ def test_staking(mine, gold, creatures_minted, user):
 
     assert creatures.balanceOf(mine.address) == 0
     assert creatures.balanceOf(user) == 1
-    assert gold.balanceOf(user) == Wei("20 ether")
+    assert gold.balanceOf(user) >= Wei("20 ether")
 
     # test stake again
     # set approval
