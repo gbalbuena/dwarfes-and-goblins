@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/interfaces/IERC2981.sol";
-import "@openzeppelin/contracts/interfaces/IERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
@@ -15,6 +13,7 @@ import "./CreatureFactory.sol";
 
 contract CreatureToken is
     ERC721Enumerable,
+    Ownable,
     CreatureFactory,
     VRFConsumerBaseV2
 {
@@ -48,6 +47,9 @@ contract CreatureToken is
     uint256[] public s_randomWords;
     uint256 public s_requestId;
     address s_owner;
+
+    string private baseURI;
+    string private contractURIHash = 'QmQNdhY8RHi8arMZ58c36pJNDCFHLtomk2qfgMuEtKrDmx';
 
     event ReturnedRandomness(uint256[] randomWords);
     constructor(
@@ -93,11 +95,6 @@ contract CreatureToken is
         emit ReturnedRandomness(randomWords);
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == s_owner);
-        _;
-    }
-
     // Assumes the subscription is funded sufficiently.
     /**
      * @notice Requests randomness
@@ -112,5 +109,42 @@ contract CreatureToken is
             s_callbackGasLimit,
             s_numWords
         );
+    }
+
+    function getBaseURI() external view returns (string memory) {
+        return baseURI;
+    }
+
+    /**
+     * @notice The IPFS URI of contract-level metadata.
+     */
+    function contractURI() public view returns (string memory) {
+        return string(abi.encodePacked('ipfs://', contractURIHash));
+    }
+
+    function setBaseURI(string memory baseURI_) external onlyOwner {
+        baseURI = baseURI_;
+    }
+
+    /**
+     * @notice Set the _contractURIHash.
+     * @dev Only callable by the owner.
+     */
+    function setContractURIHash(string memory _contractURIHash) external onlyOwner {
+        contractURIHash = _contractURIHash;
+    }
+
+    /**
+     * @dev See {IERC721Metadata-tokenURI}.
+     */
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        require(_exists(tokenId), "Nonexistent token");
+        revert("Not yet implemented");
     }
 }

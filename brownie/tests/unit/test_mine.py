@@ -42,4 +42,4 @@ def test_staking(mine, gold, creatures_minted, user):
 
     assert creatures.balanceOf(mine.address) == 1
     assert creatures.balanceOf(user) == 0
-    assert gold.balanceOf(user) == Wei("40 ether")
+    assert gold.balanceOf(user) >= Wei("40 ether")

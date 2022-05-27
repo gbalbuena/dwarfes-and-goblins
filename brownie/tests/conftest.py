@@ -79,6 +79,10 @@ def creatures(admin, opensea_proxy, subscriptionId):
     yield nft
 
 @pytest.fixture
+def base_uri():
+    return "ipfs://QmPDabUaG1deYEXhDMfCNWq63WqaByNqHDVK5wpPJtUKxR"
+
+@pytest.fixture
 def creatures_minted(creatures_seeded, user):
     creatures_seeded.publicMint('Gabriele', {"from":user})
     assert creatures_seeded.balanceOf(user) == 1
