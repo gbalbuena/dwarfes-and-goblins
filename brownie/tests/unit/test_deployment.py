@@ -1,9 +1,12 @@
 import pytest
-from brownie import CreatureFactory, CreatureToken, Gold, Mine, chain, Wei, ZERO_ADDRESS
+from brownie import CreatureFactory, CreatureToken, Gold, Mine, chain, config, network, Wei, ZERO_ADDRESS
 
 
 def test_creature_token_deployment(admin, opensea_proxy, subscriptionId):
-    game = admin.deploy(CreatureToken, opensea_proxy, ZERO_ADDRESS, subscriptionId, gas_price=chain.base_fee)
+    gas_lane = config["networks"][network.show_active()][
+        "gas_lane"
+    ]  # Also known as keyhash
+    game = admin.deploy(CreatureToken, opensea_proxy, ZERO_ADDRESS, subscriptionId, gas_lane, gas_price=chain.base_fee)
     assert game.name() == "Creatures"
 
 

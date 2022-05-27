@@ -61,7 +61,7 @@ def creatures(admin, opensea_proxy, subscriptionId):
     ]  # Also known as keyhash
     vrf_coordinator = get_contract("vrf_coordinator")
     link_token = get_contract("link_token")
-    nft = admin.deploy(CreatureToken, opensea_proxy, vrf_coordinator.address, subscription_id, gas_price=chain.base_fee)
+    nft = admin.deploy(CreatureToken, opensea_proxy, vrf_coordinator.address, subscription_id, gas_lane, gas_price=chain.base_fee)
     nft.requestRandomWords()
     yield nft
 

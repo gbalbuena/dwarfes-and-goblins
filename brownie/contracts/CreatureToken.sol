@@ -27,30 +27,30 @@ contract CreatureToken is
 
     LinkTokenInterface LINKTOKEN;
 
+    address s_owner;
     uint256[] public s_randomWords;
     uint256 public s_requestId;
-    address s_owner;
-    uint64 public s_subscriptionId;
-    bytes32 keyHash =
-        0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
-    uint32 callbackGasLimit = 100000;
+    uint64 private s_subscriptionId;
+    bytes32 private s_keyHash;
+    uint32 immutable s_callbackGasLimit = 100000;
+
+    // The default is 3, but you can set this higher.
+    uint16 immutable s_requestConfirmations = 3;
 
     address link = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709;
 
-    // The default is 3, but you can set this higher.
-    uint16 requestConfirmations = 3;
-
     // For this example, retrieve 2 random values in one request.
     // Cannot exceed VRFCoordinatorV2.MAX_NUM_WORDS.
-    uint32 numWords = 2;
+    uint32 numWords = 1;
 
-    constructor(IProxyRegistry _openSeaProxyRegistryAddress, address _vrfCoordinator, uint64 subID)
+    constructor(IProxyRegistry _openSeaProxyRegistryAddress, address _vrfCoordinator, uint64 subID, bytes32 _keyHash)
         ERC721("Creatures", "CREA")
         VRFConsumerBaseV2(_vrfCoordinator)
     {
         proxyRegistry = _openSeaProxyRegistryAddress;
         LINKTOKEN = LinkTokenInterface(link);
         s_subscriptionId = subID;
+        s_keyHash = _keyHash;
         s_owner = msg.sender;
     }
 
@@ -77,10 +77,10 @@ contract CreatureToken is
     function requestRandomWords() external {
         // Will revert if subscription is not set and funded.
         s_requestId = COORDINATOR.requestRandomWords(
-            keyHash,
+            s_keyHash,
             s_subscriptionId,
-            requestConfirmations,
-            callbackGasLimit,
+            s_requestConfirmations,
+            s_callbackGasLimit,
             numWords
         );
     }
