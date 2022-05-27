@@ -19,7 +19,7 @@ contract CreatureToken is
     Ownable,
     ReentrancyGuard,
     ERC721Enumerable,
-    DwarfFactory,
+    CreatureFactory,
     VRFConsumerBaseV2
 {
     IProxyRegistry public immutable proxyRegistry;
@@ -31,7 +31,8 @@ contract CreatureToken is
     uint256 public s_requestId;
     address s_owner;
     uint64 public s_subscriptionId;
-    bytes32 keyHash = 0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
+    bytes32 keyHash =
+        0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
     address vrfCoordinator = 0x6168499c0cFfCaCD319c818142124B7A15E857ab;
     uint32 callbackGasLimit = 100000;
 
@@ -55,7 +56,9 @@ contract CreatureToken is
     }
 
     function publicMint(string memory _name) public {
-        uint256 randDna = _generateRandomDna(_name);
+        require(s_requestId!= 0, "Please initalize randomness");
+
+        uint256 randDna = _generateRandomDna(uint256(s_randomWords[s_requestId]));
         Race race_ = Race.Dwarf;
 
         creatures.push(Creature(_name, race_, randDna));
@@ -82,5 +85,4 @@ contract CreatureToken is
             numWords
         );
     }
-
 }
