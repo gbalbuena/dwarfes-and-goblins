@@ -22,9 +22,11 @@ networks:
   rinkeby:
     openseaProxy: '0xf57b2c51ded3a29e6891aba85459d600256cf317'
     metadata: 'ipfs://QmPDabUaG1deYEXhDMfCNWq63WqaByNqHDVK5wpPJtUKxR'
+    subscriptionId: '123455'
   development:
     openseaProxy: '0xf57b2c51ded3a29e6891aba85459d600256cf317'
     metadata: 'ipfs://QmPDabUaG1deYEXhDMfCNWq63WqaByNqHDVK5wpPJtUKxR'
+    subscriptionId: '123455'
     gas_limit: 30000000
 
 wallets:

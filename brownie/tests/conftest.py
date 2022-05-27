@@ -36,8 +36,8 @@ def creature_factory(admin):
     yield factory
 
 @pytest.fixture
-def creatures(admin, opensea_proxy):
-    nft = admin.deploy(CreatureToken, opensea_proxy, gas_price=chain.base_fee)
+def creatures(admin, opensea_proxy, subscriptionId):
+    nft = admin.deploy(CreatureToken, opensea_proxy, subscriptionId, gas_price=chain.base_fee)
     yield nft
 
 @pytest.fixture
@@ -45,6 +45,11 @@ def creatures_minted(creatures, user):
     creatures.publicMint('Gabriele', {"from":user})
     assert creatures.balanceOf(user) == 1
     yield creatures
+
+@pytest.fixture
+def subscriptionId():
+    subId = config["networks"][network.show_active()]["subscriptionId"]
+    return subId
 
 @pytest.fixture
 def admin():

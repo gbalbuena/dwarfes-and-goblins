@@ -1,4 +1,3 @@
-import pytest
 from brownie import chain, Wei
 
 

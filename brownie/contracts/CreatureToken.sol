@@ -46,7 +46,7 @@ contract CreatureToken is
     uint32 numWords = 2;
 
     constructor(IProxyRegistry _openSeaProxyRegistryAddress, uint64 subID)
-        ERC721("Dwarfs", "DWA")
+        ERC721("Creatures", "CREA")
         VRFConsumerBaseV2(vrfCoordinator)
     {
         proxyRegistry = _openSeaProxyRegistryAddress;
