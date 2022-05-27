@@ -12,6 +12,19 @@ from brownie import (
     network,
     config,accounts
 )
+
+from scripts.helpful_scripts import (
+    get_account,
+    get_contract,
+    LOCAL_BLOCKCHAIN_ENVIRONMENTS,
+    listen_for_event,
+)
+
+from scripts.vrf_scripts.create_subscription import (
+    create_subscription,
+    fund_subscription,
+)
+
 from brownie.network import priority_fee, connect
 connect()
 priority_fee("2 gwei")
@@ -37,7 +50,19 @@ def creature_factory(admin):
 
 @pytest.fixture
 def creatures(admin, opensea_proxy, subscriptionId):
-    nft = admin.deploy(CreatureToken, opensea_proxy, subscriptionId, gas_price=chain.base_fee)
+    if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+            pytest.skip("Only for local testing")
+    # Arrange
+    account = get_account()
+    subscription_id = create_subscription()
+    fund_subscription(subscription_id=subscription_id)
+    gas_lane = config["networks"][network.show_active()][
+        "gas_lane"
+    ]  # Also known as keyhash
+    vrf_coordinator = get_contract("vrf_coordinator")
+    link_token = get_contract("link_token")
+    nft = admin.deploy(CreatureToken, opensea_proxy, vrf_coordinator.address, subscription_id, gas_price=chain.base_fee)
+    nft.requestRandomWords()
     yield nft
 
 @pytest.fixture

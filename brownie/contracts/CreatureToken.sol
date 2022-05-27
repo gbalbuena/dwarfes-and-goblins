@@ -33,7 +33,6 @@ contract CreatureToken is
     uint64 public s_subscriptionId;
     bytes32 keyHash =
         0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
-    address vrfCoordinator = 0x6168499c0cFfCaCD319c818142124B7A15E857ab;
     uint32 callbackGasLimit = 100000;
 
     address link = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709;
@@ -45,9 +44,9 @@ contract CreatureToken is
     // Cannot exceed VRFCoordinatorV2.MAX_NUM_WORDS.
     uint32 numWords = 2;
 
-    constructor(IProxyRegistry _openSeaProxyRegistryAddress, uint64 subID)
+    constructor(IProxyRegistry _openSeaProxyRegistryAddress, address _vrfCoordinator, uint64 subID)
         ERC721("Creatures", "CREA")
-        VRFConsumerBaseV2(vrfCoordinator)
+        VRFConsumerBaseV2(_vrfCoordinator)
     {
         proxyRegistry = _openSeaProxyRegistryAddress;
         LINKTOKEN = LinkTokenInterface(link);
