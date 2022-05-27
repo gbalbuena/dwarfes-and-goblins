@@ -22,9 +22,18 @@ Last standing characters will be reward: Stay tuned
 
 ## Game Design Concepts
 
+Our game asset will be generative in nature using low
+level on-chain encoding of pixel art.
+We have developed a few concepts of the Dwarf and Goblin
+rase
+
 ### Dwarfs
 
- ![Tux, the Linux mascot](/assets/dwarfs.png){width=250}
+ ![Dwarfs pixel concept](/assets/dwarfs.png)
+
+### Goblins
+
+ ![Dwarfs pixel concept](/assets/goblins.png)
 
 ## Prerequisites
 
