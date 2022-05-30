@@ -40,3 +40,8 @@
 .AppWrapper {
     margin-top: 1em;
 }
+
+.AppIcon {
+    height: 4em;
+    width: 4em;
+}

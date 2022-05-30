@@ -1,13 +1,23 @@
+@font-face {
+    font-family: 'Press Start 2P', cursive;
+    src: local("Press Start 2P"),
+        url("./fonts/PressStart2P-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+
+* {
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: black;
+    color: white;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
 }

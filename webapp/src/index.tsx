@@ -1,14 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+
+
+
+
 import reportWebVitals from './reportWebVitals';
 import { MoralisProvider } from "react-moralis";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import './fonts/PressStart2P-Regular.ttf';
+import "./index.css";
+import App from "./App";
+import { Home, Lore, About, Leaderboard, Wallet } from './Pages';
 
 ReactDOM.render(
   <React.StrictMode>
     <MoralisProvider serverUrl="https://zcrcu3h8povs.usemoralis.com:2053/server" appId="FKTLyYuWtVM9qUulUEMxdxklFGLuk2oyadTIeos8">
-      <App />
+      <BrowserRouter>
+        <Routes>
+          {/* <Route path="/" element={<App />}> */}
+          <Route element={<App />}>
+            <Route path="" element={<Home />} />
+            <Route path="lore" element={<Lore />} />
+            <Route path="leaderboard" element={<Leaderboard />} />
+            <Route path="wallet" element={<Wallet />} />
+            <Route path="about" element={<About />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </MoralisProvider>
   </React.StrictMode>,
   document.getElementById("root")
