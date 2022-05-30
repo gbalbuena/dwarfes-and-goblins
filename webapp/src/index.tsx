@@ -5,7 +5,6 @@ import ReactDOM from "react-dom";
 
 
 import reportWebVitals from './reportWebVitals';
-import { MoralisProvider } from "react-moralis";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -16,7 +15,6 @@ import { Home, Lore, About, Leaderboard, Wallet } from './Pages';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoralisProvider serverUrl="https://zcrcu3h8povs.usemoralis.com:2053/server" appId="FKTLyYuWtVM9qUulUEMxdxklFGLuk2oyadTIeos8">
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<App />}> */}
@@ -29,7 +27,6 @@ ReactDOM.render(
           </Route>
         </Routes>
       </BrowserRouter>
-    </MoralisProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
