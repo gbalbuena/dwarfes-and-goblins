@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-
-// import { useMoralis } from "react-moralis";
-// import { ConnectButton } from 'web3uikit';
 import { Container, Row, Col } from 'react-bootstrap'
 import { GiDwarfFace, GiGoblinHead } from "react-icons/gi";
 
