@@ -56,7 +56,9 @@ function App() {
               ·<Link to="/wallet">wallet</Link>
               ·<Link to="/about">about</Link>
             </Col>
-            <ConnectButton></ConnectButton>
+            <Col xs={4}>
+              <ConnectButton></ConnectButton>
+            </Col>
           </Row>
 
           <Row>
