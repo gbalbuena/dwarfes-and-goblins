@@ -46,8 +46,4 @@ yarn global add ganache@7.0.4
 ```
 
 
-## Contributors
 
-* bushwalker.eth
-* anotherme.eth
-* bleaknight

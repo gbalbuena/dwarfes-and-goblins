@@ -17,3 +17,7 @@ doc: https://docs.chain.link/docs/chainlink-vrf/
 ## Art
 
 https://opengameart.org/
+
+PIXIEJS
+
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;

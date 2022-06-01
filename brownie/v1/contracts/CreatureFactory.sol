@@ -8,8 +8,8 @@ contract CreatureFactory {
 
     uint256 public constant MAX_SUPPLY = 1000;
 
-    uint256 dna_digits = 32;
-    uint256 dna_modulus = 10 ** dna_digits;
+    uint256 dnaDigits = 32;
+    uint256 dnaModulus = 10 ** dnaDigits;
 
     struct Creature {
         string name;
@@ -27,12 +27,12 @@ contract CreatureFactory {
     mapping (address => uint256) ownerCreaturesCount;
 
     function createRandomCreature(string memory _name, uint256 seed) public {
-        uint256 random_dna = _generateRandomDna(seed);
-        _createCreature(_name, Race.Dwarf, random_dna);
+        uint256 randomDna = _generateRandomDna(seed);
+        _createCreature(_name, Race.Dwarf, randomDna);
     }
 
     function _generateRandomDna(uint256 seed) internal view returns (uint256) {
-        return seed % dna_modulus;
+        return seed % dnaModulus;
     }
 
     function _createCreature(string memory name_, Race race_, uint256 dna_) internal {

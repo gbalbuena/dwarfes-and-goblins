@@ -71,3 +71,9 @@ brownie pm install smartcontractkit/chainlink@1.4.1
 ```bash
 make t
 ```
+
+## Contributors
+
+* bushwalker.eth
+* anotherme.eth
+* bleaknight

@@ -3,11 +3,12 @@ pragma solidity 0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 
-import {IProxyRegistry} from "./../external/opensea/IProxyRegistry.sol";
+import { IProxyRegistry } from "./../external/opensea/IProxyRegistry.sol";
 
 import "./CreatureFactory.sol";
 
@@ -52,14 +53,17 @@ contract CreatureToken is
     string private contractURIHash = 'QmQNdhY8RHi8arMZ58c36pJNDCFHLtomk2qfgMuEtKrDmx';
 
     event ReturnedRandomness(uint256[] randomWords);
+
     constructor(
         IProxyRegistry _openSeaProxyRegistryAddress,
+
         uint64 subscriptionId,
         address vrfCoordinator,
         address link,
         bytes32 keyHash
     ) ERC721("Creatures", "CREA") VRFConsumerBaseV2(vrfCoordinator) {
         proxyRegistry = _openSeaProxyRegistryAddress;
+
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
         LINKTOKEN = LinkTokenInterface(link);
         s_subscriptionId = subscriptionId;
