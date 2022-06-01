@@ -12,9 +12,9 @@ contract Gold is ERC20, Ownable {
   constructor() ERC20("GOLD", "GOLD") { }
 
   /**
-   * mints $WOOL to a recipient
-   * @param to the recipient of the $WOOL
-   * @param amount the amount of $WOOL to mint
+   * mints $GOLD to a recipient
+   * @param to the recipient of the $GOLD
+   * @param amount the amount of $GOLD to mint
    */
   function mint(address to, uint256 amount) external {
     //TODO fix this permission to the controller (Mine)
@@ -23,9 +23,9 @@ contract Gold is ERC20, Ownable {
   }
 
   /**
-   * burns $WOOL from a holder
-   * @param from the holder of the $WOOL
-   * @param amount the amount of $WOOL to burn
+   * burns $GOLD from a holder
+   * @param from the holder of the $GOLD
+   * @param amount the amount of $GOLD to burn
    */
   function burn(address from, uint256 amount) external {
     require(controllers[msg.sender], "Only controllers can burn");
